@@ -1,0 +1,139 @@
+*go-template-lsp.txt*    Neovim plugin for Allseas/go-template-lsp
+
+==============================================================================
+INTRODUCTION                                          *go-template-lsp*
+
+Neovim integration for the Allseas go-template-lsp language server,
+providing syntax highlighting, diagnostics, completion, hover,
+go-to-definition, indentation, commenting, and more for Go
+text/template files.
+
+==============================================================================
+REQUIREMENTS                                          *go-template-lsp-requirements*
+
+- Neovim >= 0.9
+- nvim-lspconfig
+- mason.nvim (optional, for automatic installation)
+- The `go-template-lsp` binary on your $PATH
+  Install via Mason or build from https://github.com/Allseas/go-template-lsp
+
+==============================================================================
+SETUP                                                 *go-template-lsp-setup*
+
+Using lazy.nvim with Mason: >lua
+  {
+    "alexremstedt/go-template-lsp.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "williamboman/mason.nvim",
+    },
+    ft = "gotmpl",
+    opts = {},
+  }
+<
+
+Without Mason: >lua
+  {
+    "alexremstedt/go-template-lsp.nvim",
+    dependencies = { "neovim/nvim-lspconfig" },
+    ft = "gotmpl",
+    opts = { mason = false },
+  }
+<
+
+Manual setup: >lua
+  require("go-template-lsp").setup()
+<
+
+==============================================================================
+CONFIGURATION                                         *go-template-lsp-config*
+
+Pass options to `setup()`: >lua
+  require("go-template-lsp").setup({
+    filetypes = { "gotmpl" },
+    cmd = { "go-template-lsp" },
+    root_markers = { "go.mod", ".git" },
+    settings = {},
+    mason = true,
+    on_attach = function(client, bufnr)
+      -- your custom on_attach
+    end,
+  })
+<
+
+Options:
+  `cmd`            Command to start the LSP server.
+                 Default: `{ "go-template-lsp" }`
+
+  `filetypes`      Filetypes to attach the LSP to.
+                 Default: `{ "gotmpl" }`
+
+  `root_markers`   Files/dirs used to detect the project root.
+                 Default: `{ "go.mod", ".git" }`
+
+  `settings`       LSP server settings table.
+                 Default: `{}`
+
+  `mason`          Use Mason-installed binary if available.
+                 Default: `true`
+
+  `on_attach`      Callback after the LSP attaches to a buffer.
+                 Default: `nil`
+
+==============================================================================
+COMMANDS                                              *go-template-lsp-commands*
+
+:GoTemplateLspInstall                                 *:GoTemplateLspInstall*
+    Install the go-template-lsp binary via Mason.
+
+:checkhealth go-template-lsp                          *go-template-lsp-health*
+    Verify that the binary, nvim-lspconfig, and mason are available.
+
+==============================================================================
+SYNTAX HIGHLIGHTING                                   *go-template-lsp-syntax*
+
+The plugin provides syntax highlighting for Go template constructs
+inside `{{ }}` delimiters:
+
+  Delimiters      `{{`, `}}`, `{{-`, `-}}`
+  Keywords        `if`, `else`, `end`, `range`, `with`, `template`,
+                  `block`, `define`
+  Functions       Built-in Go template functions and Sprig/Helm extras
+  Variables       `$`, `$var`
+  Fields          `.Field`, `.Values.key`
+  Strings         Double-quoted and backtick raw strings
+  Comments        `{{/* comment */}}`
+
+==============================================================================
+FILETYPE DETECTION                                    *go-template-lsp-filetypes*
+
+The plugin automatically detects the following as `gotmpl`:
+
+  *.tmpl          *.tpl           *.go.tmpl
+  *.html.tmpl     *.yaml.tmpl     *.yml.tmpl
+  *.json.tmpl     *.txt.tmpl
+
+==============================================================================
+INDENTATION                                           *go-template-lsp-indent*
+
+Automatic indentation increases after `if`, `range`, `with`, `block`,
+and `define` blocks, and decreases at `else` and `end`.
+
+==============================================================================
+COMMENTING                                            *go-template-lsp-comment*
+
+The `commentstring` is set to `{{/* %s */}}`, enabling `gc`/`gcc`
+(via vim-commentary or built-in commenting in Neovim 0.10+).
+
+==============================================================================
+MATCHIT                                               *go-template-lsp-matchit*
+
+When matchit is loaded, `%` jumps between paired template keywords:
+  `if` / `else` / `end`
+  `range` / `else` / `end`
+  `with` / `else` / `end`
+  `block` / `end`
+  `define` / `end`
+
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
