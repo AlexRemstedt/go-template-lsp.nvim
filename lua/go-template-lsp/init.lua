@@ -56,7 +56,7 @@ function M.setup(opts)
   vim.schedule(function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].filetype == "gotmpl" then
-        vim.api.nvim_exec_autocmds("FileType", { buffer = buf, pattern = "gotmpl" })
+        vim.api.nvim_exec_autocmds("FileType", { buffer = buf })
       end
     end
   end)

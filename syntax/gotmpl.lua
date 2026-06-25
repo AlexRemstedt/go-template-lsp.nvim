@@ -36,8 +36,8 @@ cmd([[syn match gotmplField contained "\.\w\+"]])
 cmd([[syn match gotmplPipe contained "|"]])
 cmd([[syn match gotmplOperator contained ":="]])
 
-cmd([[syn region gotmplString contained start=+"+ skip=+\\"+ end=+"+ ]])
-cmd([[syn region gotmplRawString contained start=+`+ end=+`+ ]])
+cmd([[syn region gotmplString start=+"+ skip=+\\"+ end=+"+ contained]])
+cmd([[syn region gotmplRawString start=+`+ end=+`+ contained]])
 
 cmd([[syn match gotmplNumber contained "\<\d\+\>"]])
 cmd([[syn match gotmplNumber contained "\<\d\+\.\d*\>"]])
