@@ -10,7 +10,7 @@ function M.get()
   local prev = vim.fn.getline(lnum)
   local cur = vim.fn.getline(vim.v.lnum)
 
-  if vim.fn.match(prev, [[{{-\?\s*\(if\|range\|with\|block\|define\)\>]]) >= 0 then
+  if vim.fn.match(prev, [[{{-\?\s*\(if\|range\|with\|block\|define\|else\)\>]]) >= 0 then
     ind = ind + vim.fn.shiftwidth()
   end
 

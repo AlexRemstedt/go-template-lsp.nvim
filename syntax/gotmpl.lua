@@ -4,7 +4,7 @@ end
 
 local cmd = vim.cmd
 
-cmd([[syn cluster gotmplExpr contains=gotmplKeyword,gotmplFunction,gotmplVariable,gotmplPipe,gotmplString,gotmplRawString,gotmplNumber,gotmplBool,gotmplNil,gotmplOperator,gotmplField,gotmplIdentifier]])
+cmd([[syn cluster gotmplExpr add=gotmplKeyword,gotmplFunction,gotmplVariable,gotmplPipe,gotmplString,gotmplRawString,gotmplNumber,gotmplBool,gotmplNil,gotmplOperator,gotmplField,gotmplIdentifier]])
 
 cmd([[syn region gotmplAction matchgroup=gotmplDelimiter start="{{-\?" end="-\?}}" contains=@gotmplExpr]])
 
@@ -16,7 +16,7 @@ cmd([[syn keyword gotmplKeyword contained if else end range with template block 
 cmd([[syn keyword gotmplFunction contained and call html index js len not or print printf println slice urlquery eq ne lt le gt ge]])
 cmd([[syn keyword gotmplFunction contained default empty coalesce toJson fromJson toYaml fromYaml toToml fromToml]])
 cmd([[syn keyword gotmplFunction contained trim trimAll trimPrefix trimSuffix nospace upper lower title untitle repeat substr]])
-cmd([[syn keyword gotmplFunction contained contains hasPrefix hasSuffix quote squote cat indent nindent replace]])
+cmd([[syn keyword gotmplFunction contained hasPrefix hasSuffix quote squote cat indent nindent replace contains]])
 cmd([[syn keyword gotmplFunction contained list append prepend first rest last initial reverse uniq without has compact concat]])
 cmd([[syn keyword gotmplFunction contained dict get set unset hasKey pluck keys values merge mergeOverwrite]])
 cmd([[syn keyword gotmplFunction contained b64enc b64dec sha1sum sha256sum adler32sum]])
