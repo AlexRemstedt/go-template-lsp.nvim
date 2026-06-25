@@ -4,12 +4,12 @@ end
 
 local cmd = vim.cmd
 
+cmd([[syn cluster gotmplExpr contains=gotmplKeyword,gotmplFunction,gotmplVariable,gotmplPipe,gotmplString,gotmplRawString,gotmplNumber,gotmplBool,gotmplNil,gotmplOperator,gotmplField,gotmplIdentifier]])
+
 cmd([[syn region gotmplAction matchgroup=gotmplDelimiter start="{{-\?" end="-\?}}" contains=@gotmplExpr]])
 
 cmd([[syn region gotmplComment matchgroup=gotmplDelimiter start="{{-\?\s*/\*" end="\*/-\?\s*}}" contains=gotmplTodo]])
 cmd([[syn keyword gotmplTodo contained TODO FIXME XXX NOTE HACK BUG]])
-
-cmd([[syn cluster gotmplExpr contains=gotmplKeyword,gotmplFunction,gotmplVariable,gotmplPipe,gotmplString,gotmplRawString,gotmplNumber,gotmplBool,gotmplNil,gotmplOperator,gotmplField,gotmplIdentifier]])
 
 cmd([[syn keyword gotmplKeyword contained if else end range with template block define]])
 
